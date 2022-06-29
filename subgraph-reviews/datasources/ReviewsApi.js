@@ -27,6 +27,15 @@ class ReviewsAPI {
     reviews = [...reviews, newReview];
     return newReview;
   }
+
+  getOverallRatingForLocation(id) {
+    const allRatings = reviews
+      .filter(r => r.locationId === id)
+      .map(r => r.rating);
+    const sum = allRatings.reduce((a, b) => a + b, 0);
+    const average = sum / allRatings.length || 0;
+    return average;
+  }
 }
 
 module.exports = ReviewsAPI;
